@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Para ti 💗</title>
+<link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@500;600&family=Lora:ital@0;1&display=swap" rel="stylesheet">
+<style>
+:root{--p1:#ffe4ec;--p2:#ffcfdf;--p3:#f6a9c2;--p4:#e8789f;--cream:#fff9f1;--ink:#6b3b4c;--script:'Dancing Script',cursive;--serif:'Lora',Georgia,serif}
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+html,body{height:100%;margin:0}
+body{background:linear-gradient(160deg,#ffeef3 0%,#ffd9e6 45%,#fbc3d8 100%);font-family:var(--serif);color:var(--ink);overflow:hidden;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:env(safe-area-inset-top) 0 env(safe-area-inset-bottom);touch-action:pan-y}
+#bg{position:fixed;inset:0;pointer-events:none;overflow:hidden}
+#bg span{position:absolute;bottom:-40px;animation:rise linear infinite;opacity:0}
+@keyframes rise{0%{transform:translateY(0) translateX(0);opacity:0}15%{opacity:.55}85%{opacity:.4}100%{transform:translateY(-115vh) translateX(24px);opacity:0}}
+#book{position:relative;width:min(92vw,420px);height:min(76dvh,650px);perspective:1800px;z-index:2}
+.leaf{position:absolute;inset:0;transform-origin:left center;transition:transform 1.2s cubic-bezier(.65,.05,.25,1),opacity .5s ease .7s,visibility 0s linear 1.2s;border-radius:6px 22px 22px 6px;background:var(--cream);box-shadow:0 14px 34px rgba(190,90,130,.28),inset 6px 0 10px -6px rgba(200,120,150,.35);overflow:hidden;backface-visibility:hidden}
+.leaf::before{content:"";position:absolute;inset:9px 9px 9px 14px;border:1.5px dashed rgba(232,120,159,.35);border-radius:4px 16px 16px 4px;pointer-events:none;z-index:3}
+.leaf.flipped{transform:rotateY(-165deg);opacity:0;visibility:hidden;pointer-events:none}
+.leaf.cover{background:linear-gradient(160deg,#fff0f5,#ffd6e5)}
+.leaf.end{background:linear-gradient(180deg,#ffe3ee,#ffd0e1 60%,#ffc2d8)}
+.sheet{position:absolute;inset:0;padding:36px 32px 42px 34px;overflow-y:auto;z-index:2;-webkit-overflow-scrolling:touch;display:flex;flex-direction:column;font-size:16.5px}
+.sheet::before,.sheet::after{content:"";margin:auto}
+.sheet p{margin:0 0 .9em;font-size:1em;line-height:1.55}
+.sheet .to{font-family:var(--script);font-size:1.8em;margin-bottom:.3em;color:var(--p4)}
+.sheet .sign{font-family:var(--script);font-size:1.7em;color:var(--p4);margin-top:.3em}
+.sheet .big{font-family:var(--script);font-size:1.5em;line-height:1.4;color:var(--p4)}
+.pg{position:absolute;bottom:15px;left:0;right:0;text-align:center;font-size:12px;color:var(--p3);z-index:4}
+.d{position:absolute;pointer-events:none;z-index:1;animation:sway 7s ease-in-out infinite}
+.d.t{opacity:.75}
+@keyframes sway{0%,100%{transform:translateY(0) rotate(var(--r,0deg))}50%{transform:translateY(-6px) rotate(calc(var(--r,0deg) + 4deg))}}
+.tw{animation:tw 4.5s ease-in-out infinite}
+@keyframes tw{0%,100%{opacity:.15;transform:scale(.7)}50%{opacity:.95;transform:scale(1.1)}}
+.cloud{position:absolute;z-index:1;opacity:.95;animation:drift linear infinite;pointer-events:none}
+@keyframes drift{from{transform:translateX(-140px)}to{transform:translateX(480px)}}
+/* sobre */
+.stage{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;z-index:2}
+.env{position:relative;width:260px;height:176px;margin-top:20px}
+.env .back{position:absolute;inset:0;background:#f7b5cb;border-radius:8px}
+.env .paper{position:absolute;left:14px;right:14px;top:10px;height:150px;background:#fffdf8;border-radius:6px;box-shadow:0 2px 8px rgba(0,0,0,.08);transition:transform 1s ease .7s;z-index:2;display:flex;align-items:center;justify-content:center;font-family:var(--script);color:var(--p4);font-size:22px}
+.env.open .paper{transform:translateY(-70px)}
+.env .front{position:absolute;inset:0;z-index:3;border-radius:8px;overflow:hidden;pointer-events:none}
+.env .front::before,.env .front::after{content:"";position:absolute;inset:0}
+.env .front::before{background:#f9c3d5;clip-path:polygon(0 0,50% 58%,0 100%)}
+.env .front::after{background:#f9c3d5;clip-path:polygon(100% 0,50% 58%,100% 100%)}
+.env .bot{position:absolute;inset:0;background:#fbd0df;clip-path:polygon(0 100%,50% 52%,100% 100%);z-index:3;border-radius:8px}
+.env .flap{position:absolute;left:0;right:0;top:0;height:92px;background:#f4a3bf;clip-path:polygon(0 0,100% 0,50% 100%);transform-origin:top;transition:transform .9s ease,z-index 0s linear .45s;z-index:5;border-radius:8px 8px 0 0}
+.env.open .flap{transform:rotateX(180deg);z-index:1}
+.seal{position:absolute;left:50%;top:70px;transform:translateX(-50%);z-index:6;font-size:24px;color:#e0577f;transition:opacity .4s;filter:drop-shadow(0 2px 2px rgba(150,40,80,.3))}
+.env.open .seal{opacity:0}
+.label{position:absolute;left:50%;bottom:20px;transform:translateX(-50%);z-index:7;font-family:var(--script);font-size:27px;color:#c24a73;white-space:nowrap;transition:opacity .5s}
+.env.open .label{opacity:0}
+.openbtn{margin-top:46px;border:0;background:#fff;color:var(--p4);font-family:var(--script);font-size:24px;padding:8px 30px;border-radius:30px;box-shadow:0 6px 16px rgba(220,100,150,.3);cursor:pointer;transition:opacity .5s,transform .2s;z-index:5}
+.openbtn:active{transform:scale(.95)}
+.openbtn.hide{opacity:0;pointer-events:none}
+/* nav */
+#nav{display:flex;align-items:center;gap:18px;margin-top:16px;z-index:3;transition:opacity .5s}
+#nav.off{opacity:0;pointer-events:none}
+#nav button{width:44px;height:44px;border-radius:50%;border:0;background:rgba(255,255,255,.85);color:var(--p4);font-size:20px;box-shadow:0 4px 12px rgba(220,100,150,.25);cursor:pointer}
+#nav button:disabled{opacity:.35}
+#dots{display:flex;gap:7px}
+#dots i{width:7px;height:7px;border-radius:50%;background:#fff;opacity:.6;transition:all .4s}
+#dots i.on{background:var(--p4);opacity:1;transform:scale(1.3)}
+@media (prefers-reduced-motion:reduce){*{animation-duration:0s!important}}
+</style>
+</head>
+<body>
+<svg width="0" height="0" style="position:absolute"><defs>
+<symbol id="kitty" viewBox="0 0 100 86"><path d="M14 36 8 6l30 14z" fill="#fff" stroke="#c9738f" stroke-width="2.5" stroke-linejoin="round"/><path d="M86 36 92 6 62 20z" fill="#fff" stroke="#c9738f" stroke-width="2.5" stroke-linejoin="round"/><ellipse cx="50" cy="52" rx="42" ry="30" fill="#fff" stroke="#c9738f" stroke-width="2.5"/><ellipse cx="33" cy="52" rx="4" ry="5.5" fill="#4a2a35"/><ellipse cx="67" cy="52" rx="4" ry="5.5" fill="#4a2a35"/><ellipse cx="50" cy="60" rx="5" ry="3.5" fill="#ffd45e"/><g stroke="#4a2a35" stroke-width="1.8" stroke-linecap="round"><path d="M6 52h17M7 61l15-3M94 52H77M93 61 78 58"/></g><g transform="translate(70 18)"><circle cx="-10" cy="0" r="9" fill="#ff7aa8"/><circle cx="10" cy="0" r="9" fill="#ff7aa8"/><circle cx="0" cy="0" r="5" fill="#ff4f8b"/></g></symbol>
+<symbol id="flower" viewBox="0 0 40 40"><g fill="#ffb3cb"><circle cx="20" cy="9" r="8"/><circle cx="31" cy="17" r="8"/><circle cx="27" cy="30" r="8"/><circle cx="13" cy="30" r="8"/><circle cx="9" cy="17" r="8"/></g><circle cx="20" cy="20" r="6" fill="#fff3b0"/></symbol>
+<symbol id="bow" viewBox="0 0 50 30"><path d="M25 15 3 3v24z" fill="#ff8fb4"/><path d="M25 15 47 3v24z" fill="#ff8fb4"/><circle cx="25" cy="15" r="6" fill="#ff5e93"/></symbol>
+<symbol id="heart" viewBox="0 0 32 30"><path d="M16 29C4 20 1 13 1 8.5 1 4 4.5 1 8.5 1 12 1 14.5 3 16 6c1.5-3 4-5 7.5-5C27.500 1 31 4 31 8.5 31 13 28 20 16 29z" fill="#ffa6c4"/></symbol>
+<symbol id="cloud" viewBox="0 0 120 60"><path d="M22 54a18 18 0 0 1-2-36 24 24 0 0 1 46-6 22 22 0 0 1 34 14 14 14 0 0 1 2 28z" fill="#fff"/></symbol>
+</defs></svg>
+<div id="bg"></div>
+
+<div id="book">
+
+<section class="leaf cover" data-deco="cover">
+ <div class="stage">
+  <div class="env" id="env">
+   <div class="back"></div>
+   <div class="paper">♡</div>
+   <div class="front"></div><div class="bot"></div>
+   <div class="flap"></div><div class="seal">♥</div>
+   <div class="label">Para ti 💗</div>
+  </div>
+  <button class="openbtn" id="openBtn">Abrir ♡</button>
+ </div>
+</section>
+
+<section class="leaf" data-deco="l1"><div class="sheet">
+<p class="to">Flaca</p>
+<p>Feliz primer añito, mi amor. 💗</p>
+<p>Qué raro pensar que ya pasó un año desde que empezamos oficialmente esto. Siento que ha pasado muchísimo tiempo y al mismo tiempo siento que fue hace poquito. Hemos vivido tantas cosas juntas que ya hay una parte de mi vida que simplemente no puedo imaginar sin ti jaja.</p>
+</div><div class="pg">♡ 1 ♡</div></section>
+
+<section class="leaf" data-deco="l2"><div class="sheet">
+<p>Quería aprovechar este día para decirte que te amo muchísimo y que, a pesar de todas las cosas que hemos vivido, sigues siendo una persona demasiado importante para mí. Me gusta pensar en todas las veces que pasamos tiempo riendo, hablando por horas, nos hemos extrañado, nos hemos visto y simplemente hemos estado juntas sin necesidad de hacer nada como tal.</p>
+<p>Extraño mucho estar contigo en persona, la verdad. Extraño abrazarte, acostarnos juntas, hablar de cualquier bobada y simplemente tenerte cerquita. Creo que muchas veces esos momentos tan “simples” son los que más me terminaron gustando.</p>
+</div><div class="pg">♡ 2 ♡</div></section>
+
+<section class="leaf" data-deco="l3"><div class="sheet">
+<p>También sé que últimamente no hemos estado en nuestro mejor momento. Hemos tenido discusiones, cosas que nos han dolido y muchas veces terminamos sin entender realmente lo que la otra quería decir. No quiero hacer como si eso no existiera, porque sí existe y sé que lo hemos sentido.</p>
+<p>Pero tampoco quería que eso hiciera que hoy dejara de ser importante para mí.</p>
+</div><div class="pg">♡ 3 ♡</div></section>
+
+<section class="leaf" data-deco="l4"><div class="sheet">
+<p>Todo esto contigo ha significado muchísimo para mí. Has sido parte de momentos muy bonitos de mi vida y también has estado ahí en momentos en los que las cosas se vuelven un poco complejas. Y aunque todavía tengamos cosas que aprender y mejorar, me gustaría que si las dos seguimos queriendo estar juntas, podamos hacerlo de una manera diferente. Que podamos no sé, escucharnos más, entendernos un poco mejor y pues, sentir que estamos del mismo lado, porque muchas veces se siente más cómo una rivalidad.</p>
+</div><div class="pg">♡ 4 ♡</div></section>
+
+<section class="leaf" data-deco="l5"><div class="sheet">
+<p>No espero que todo sea perfecto, porque sé que ninguna relación lo es. Solo quiero que podamos seguir construyendo algo que se sienta bonito para ambas, donde no sé, podamos hablar de lo que sentimos sin miedo a cualquier cosa, y donde las cosas que nos prometemos también se puedan ver en las acciones.</p>
+<p>Y bueno, dejando un poquito lo serio de lado porque hoy es un bonito día jajaja, también quiero decirte que me hace feliz tenerte. Me haces bastante falta, más de lo que probablemente te digo, y hay muchas veces en las que simplemente quisiera tenerte aquí conmigo.</p>
+</div><div class="pg">♡ 5 ♡</div></section>
+
+<section class="leaf" data-deco="l6"><div class="sheet">
+<p>Gracias por este primer año, por todo lo bonito, las risas y por todo lo que hemos logrado ir construyendo.</p>
+<p>Espero que algún día podamos recordar todo eso y ver que esto solo fue el principio de muchas cosas más.</p>
+<p>Feliz aniversario, mi Salo, mi flaquita 💗</p>
+<p>Te amo muchísimo.</p>
+<p class="sign">Mau ♡</p>
+</div><div class="pg">♡ 6 ♡</div></section>
+
+<section class="leaf end" data-deco="end"><div class="sheet" style="align-items:center;text-align:center;padding:50px 34px">
+<p class="big">Quería completar esto con el otro detallito, necesitaba decirte un poco de todo esto. Solo espero que te guste, es con mucho amor.</p>
+<p class="big" style="margin-top:.6em">M 💗</p>
+</div></section>
+
+</div>
+
+<div id="nav" class="off">
+ <button id="prev" aria-label="Página anterior">‹</button>
+ <div id="dots"></div>
+ <button id="next" aria-label="Página siguiente">›</button>
+</div>
+
+<script>
+(function(){
+var leaves=[].slice.call(document.querySelectorAll('.leaf')),N=leaves.length,cur=0,opened=false;
+var nav=document.getElementById('nav'),prev=document.getElementById('prev'),next=document.getElementById('next'),dots=document.getElementById('dots');
+for(var i=0;i<N;i++){dots.appendChild(document.createElement('i'));}
+leaves.forEach(function(l,i){l.style.zIndex=N-i;});
+
+/* fondo flotante */
+var bg=document.getElementById('bg'),ch=['♡','♥','✦','✧','♡'],cl=['#ff9dbc','#ffc2d6','#fff','#f27ba3'];
+for(var k=0;k<20;k++){var s=document.createElement('span');s.textContent=ch[k%ch.length];
+s.style.left=Math.random()*100+'%';s.style.fontSize=(12+Math.random()*20)+'px';s.style.color=cl[k%cl.length];
+s.style.animationDuration=(20+Math.random()*20)+'s';s.style.animationDelay=(-Math.random()*30)+'s';bg.appendChild(s);}
+
+/* decoraciones */
+function use(id,x,y,w,r,delay,cls){return '<svg class="d '+(cls||'')+'" style="left:'+x+';top:'+y+';width:'+w+'px;height:'+w+'px;--r:'+r+'deg;animation-delay:'+delay+'s"><use href="#'+id+'"/></svg>';}
+function star(x,y,sz,d){return '<span class="d tw" style="left:'+x+';top:'+y+';font-size:'+sz+'px;color:#f5a3bf;animation-delay:'+d+'s">✦</span>';}
+var D={
+cover:use('kitty','6%','5%',58,-8,0)+use('bow','74%','7%',40,12,1)+use('flower','80%','80%',44,0,2)+use('flower','5%','82%',38,0,1)+use('heart','16%','24%',22,-10,0,'t')+use('heart','82%','28%',20,10,2,'t')+use('heart','10%','64%',24,0,1,'t')+use('heart','86%','56%',18,0,3,'t')+use('bow','4%','45%',30,-14,2)+use('kitty','66%','88%',36,8,1)+star('26%','10%',14,0)+star('64%','18%',12,1.5)+star('90%','44%',16,2.5)+star('20%','90%',14,1)+star('48%','4%',12,3)+star('8%','32%',12,2),
+l1:use('kitty','72%','90%',50,0,0)+use('flower','84%','2%',40,0,1)+use('bow','4%','93%',32,-10,2)+star('88%','30%',14,0)+use('heart','6%','2%',22,0,1,'t'),
+l2:use('flower','2%','92%',36,0,0)+use('heart','88%','92%',24,0,1,'t')+use('bow','82%','1.5%',34,10,2)+star('6%','1.5%',14,1),
+l3:use('flower','84%','92%',38,0,1)+use('heart','4%','93%',22,0,0,'t')+use('kitty','76%','0%',40,6,2)+star('90%','50%',14,2),
+l4:use('bow','4%','92%',34,-8,0)+use('flower','86%','1%',36,0,1)+use('heart','88%','92%',24,0,2,'t')+star('5%','2%',14,1),
+l5:use('flower','3%','92%',36,0,2)+use('kitty','78%','91%',42,0,0)+use('heart','88%','1.5%',22,0,1,'t')+star('6%','2%',14,0),
+l6:use('kitty','72%','89%',52,0,0)+use('heart','4%','3%',24,0,1,'t')+use('flower','84%','2%',38,0,2)+use('bow','3%','92%',34,-10,1)+star('90%','40%',14,1),
+end:'<svg class="cloud" style="top:8%;left:0;width:120px;height:60px;animation-duration:46s"><use href="#cloud"/></svg><svg class="cloud" style="top:22%;left:0;width:90px;height:45px;animation-duration:62s;animation-delay:-30s"><use href="#cloud"/></svg><svg class="cloud" style="top:70%;left:0;width:130px;height:65px;animation-duration:54s;animation-delay:-18s"><use href="#cloud"/></svg><svg class="cloud" style="top:84%;left:0;width:90px;height:45px;animation-duration:70s;animation-delay:-45s"><use href="#cloud"/></svg>'+use('flower','2%','2%',38,0,0)+use('flower','86%','3%',34,0,1)+use('flower','1%','44%',32,0,2)+use('flower','88%','48%',34,0,1)+use('flower','4%','88%',40,0,0)+use('flower','84%','90%',38,0,2)+use('kitty','40%','90%',46,0,1)+use('bow','80%','16%',30,10,1)+use('bow','8%','18%',28,-10,2)+use('heart','20%','10%',20,0,0,'t')+use('heart','72%','76%',22,0,2,'t')+use('heart','26%','76%',18,0,1,'t')+star('50%','6%',16,0)+star('14%','60%',14,1)+star('86%','64%',14,2)+star('34%','4%',12,3)+star('64%','84%',14,1.5)+star('46%','94%',12,2.5)
+};
+leaves.forEach(function(l){var k=l.getAttribute('data-deco');if(D[k]){var w=document.createElement('div');w.innerHTML=D[k];while(w.firstChild)l.appendChild(w.firstChild);}});
+
+/* hearts extra en portada */
+var cover=leaves[0];
+for(var j=0;j<22;j++){var h=document.createElement('span');h.className='d tw';h.textContent=j%3?'♡':'♥';
+var x=Math.random()*92,y=Math.random()*92;if(x>14&&x<80&&y>26&&y<76){x=x<47?6+Math.random()*8:84+Math.random()*8;}
+h.style.cssText='left:'+x+'%;top:'+y+'%;font-size:'+(10+Math.random()*14)+'px;color:'+(j%2?'#ffa6c4':'#ffc9da')+';animation-delay:'+(Math.random()*4)+'s';cover.appendChild(h);}
+
+function go(n){
+ cur=Math.max(0,Math.min(N-1,n));
+ leaves.forEach(function(l,i){l.classList.toggle('flipped',i<cur);});
+ [].forEach.call(dots.children,function(d,i){d.classList.toggle('on',i===cur);});
+ prev.disabled=cur===0;next.disabled=cur===N-1;
+ nav.classList.toggle('off',!opened&&cur===0);
+}
+document.getElementById('openBtn').addEventListener('click',function(){
+ document.getElementById('env').classList.add('open');this.classList.add('hide');opened=true;
+ setTimeout(function(){go(1);},2000);
+});
+prev.addEventListener('click',function(){go(cur-1);});
+next.addEventListener('click',function(){go(cur+1);});
+var sx=null;
+document.addEventListener('touchstart',function(e){sx=e.touches[0].clientX;},{passive:true});
+document.addEventListener('touchend',function(e){if(sx===null||!opened)return;var dx=e.changedTouches[0].clientX-sx;
+ if(Math.abs(dx)>60){go(dx<0?cur+1:cur-1);}sx=null;},{passive:true});
+document.addEventListener('keydown',function(e){if(!opened)return;if(e.key==='ArrowRight')go(cur+1);if(e.key==='ArrowLeft')go(cur-1);});
+function fit(){
+ [].forEach.call(document.querySelectorAll('.sheet'),function(sh){
+  var fs=17.5;sh.style.fontSize=fs+'px';
+  while(sh.scrollHeight>sh.clientHeight+1&&fs>11){fs-=0.5;sh.style.fontSize=fs+'px';}
+ });
+}
+fit();window.addEventListener('resize',fit);
+if(document.fonts&&document.fonts.ready){document.fonts.ready.then(fit);}
+go(0);
+})();
+</script>
+</body>
+</html>
